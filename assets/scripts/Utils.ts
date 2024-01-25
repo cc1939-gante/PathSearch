@@ -1,3 +1,4 @@
+import { clamp } from "cc";
 import { GameConst } from "./GameConst";
 
 export class Utils {
@@ -15,6 +16,7 @@ export class Utils {
     } 
 
     public static aStarSearch(mapData: number[][], sPos: number[], ePos: number[]): number[] {
+        console.time(`AStartSearch find way`);
         let findWays: number[] = [];
         let openList: number[] = [];
         let closeList: Set<number> = new Set();
@@ -49,6 +51,7 @@ export class Utils {
             }
         }
 
+        console.timeEnd(`AStartSearch find way`);
         return findWays;
     }
 
@@ -63,4 +66,44 @@ export class Utils {
     public static getMHDDistance(pos1: number[], pos2: number[]): number { 
         return Math.abs(pos1[0] - pos2[0]) + Math.abs(pos1[1] - pos2[1]);
     }
+
+    public static checkHVForceNeighbor(pos: number[], dir: number[]) { 
+        if(Math.abs(dir[0]) == 1) {
+            return [[pos[0] + dir[0], pos[1] + 1], [pos[0] + dir[0], pos[1] - 1]];
+        }else {
+            return [[pos[0] + 1, pos[1] + dir[1]], [pos[0] - 1, pos[1] + dir[1]]];
+        }
+    }
+
+    public static checkObliqueForceNeighbor(pos: number[], dir: number[]) { 
+        return [[pos[0] + dir[0], pos[1] + dir[1]]];
+    }
+
+    public static jumpPointSearch(mapData: number[][], sPos: number[], ePos: number[]) {
+        let openList: number[] = [];
+        let closeSet: Set<number> = new Set();
+
+        openList.push(this.pos2PosNum(sPos));
+        let parentPosNum: number;
+        let dirs: number[][];
+        while(openList.length > 0) {
+            let posNum = openList.shift();  
+            let curPos = this.posNum2Pos(posNum);
+            if(!parentPosNum) {
+                dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]]; 
+            } else {
+                let parentPos = this.posNum2Pos(parentPosNum);
+                dirs = [[clamp(curPos[0] - parentPos[0], -1, 1), clamp(curPos[1] - parentPos[1], -1, 1)]];
+            }
+
+            for(let i = 0; i < dirs.length; i++) {
+                let dir = dirs[i];
+                
+
+
+
+            }
+        }   
+    } 
+
 }

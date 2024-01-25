@@ -1,6 +1,6 @@
 export class GameConst {
-    static readonly GridWidth = 10;
-    static readonly GridHeight = 10;
-    static readonly MapWidth = 55;
-    static readonly MapHeight = 55;
+    static readonly GridWidth = 20;
+    static readonly GridHeight = 20;
+    static readonly MapWidth = 30;
+    static readonly MapHeight = 30;
 }

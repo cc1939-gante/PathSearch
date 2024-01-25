@@ -2,9 +2,6 @@ import { GameConst } from "./GameConst";
 import { Singleton } from "./TypeDef";
 
 export class GameData extends Singleton<GameData> {
-
-    public static readonly MAP_WIDTH = 55;
-    public static readonly MAP_HEIGHT = 55;
     public readonly MAP_DATA = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 1
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 2
